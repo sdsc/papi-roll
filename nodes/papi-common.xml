@@ -1,0 +1,33 @@
+<?xml version="1.0" standalone="no"?>
+
+<kickstart>
+
+<description>
+papi (Performance Application Programming Interface)
+http://icl.cs.utk.edu/papi
+</description>
+
+<copyright>
+Copyright (c) 2000 - 2011 The Regents of the University of California.
+All rights reserved. Rocks(r) v5.1 www.rocksclusters.org
+</copyright>
+
+<changelog>
+</changelog>
+
+<package>papi</package>
+
+<file name="/etc/profile.d/papi.csh" perms="0644">
+  set path = ( /opt/papi/bin $path )
+</file>
+
+<file name="/etc/profile.d/papi.sh" perms="0644">
+  export PATH=/opt/papi/bin:$PATH
+</file>
+
+<post>
+
+
+</post>
+
+</kickstart>

@@ -69,10 +69,11 @@ build:
 	)
 
 install::
-	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
+	mkdir -p -m 755 $(ROOT)/$(PKGROOT)/test
 	( \
             cd $(SOURCE)/src; \
-            make install \
+            make install; \
+            cp components/rapl/tests/rapl_busy $(ROOT)/$(PKGROOT)/test \
         )
 
 clean::

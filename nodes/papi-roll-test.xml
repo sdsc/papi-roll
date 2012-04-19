@@ -1,0 +1,87 @@
+<?xml version="1.0" standalone="no"?>
+
+<kickstart>
+
+<description>
+The papi roll installation test.
+</description>
+
+<copyright>
+Copyright (c) 2000 - 2011 The Regents of the University of California.
+All rights reserved. Rocks(r) v5.1 www.rocksclusters.org
+</copyright>
+
+<changelog>
+</changelog>
+
+<post>
+
+/bin/mkdir -m 0755 /root/rolltests
+
+<file name="/root/rolltests/papi.t" perms="0755">
+<![CDATA[#!/usr/bin/perl -w
+# papi roll installation test.  Usage:
+# papi.t [nodetype]
+
+use Test::More qw(no_plan);
+
+my $appliance = 'Compute';
+my $installedOnAppliancesPattern = '.';
+my $isInstalled = -d '/opt/papi';
+my $output;
+
+my $TESTFILE = 'tmppapi';
+
+open(OUT, ">$TESTFILE");
+print OUT <<END;
+#!/bin/bash
+/opt/papi/papi/test/rapl_busy
+close(OUT);
+
+# papi-common.xml
+if($appliance =~ /$installedOnAppliancesPattern/) {
+  ok($isInstalled, 'papi installed');
+} else {
+  ok(! $isInstalled, 'papi not installed');
+}
+SKIP: {
+
+  skip 'papi roll not installed', 1 if ! $isInstalled;
+  print "Running papi verification test\n";
+  $output = `/bin/bash $TESTFILE >$TESTFILE.out 2>&1`;
+  my $passed = `grep -c 'PASSED' $TESTFILE.out`;
+  chomp($passed);
+  ok($passed == 1, "test pass");
+
+}
+
+# papi-modules-common.xml
+SKIP: {
+
+  skip 'papi not installed', 1 if ! $isInstalled;
+  my $modulesInstalled = -f '/etc/profile.d/modules.sh';
+  if($modulesInstalled) {
+    ok(! -f '/etc/profile.d/papi.csh' &&
+       ! -f '/etc/profile.d/papi.sh', 'papi profile.d removed');
+    like($ENV{MODULEPATH}, qr#/opt/modulefiles/applications#,
+         'MODULEPATH set for applications');
+    `/bin/ls /opt/modulefiles/applications/papi/* 2>&1`;
+    ok($? == 0, 'papi module installed');
+    `/bin/ls /opt/modulefiles/applications/papi/.version.* 2>&1`;
+    ok($? == 0, 'papi version module installed');
+    ok(-l '/opt/modulefiles/applications/papi/.version',
+       'papi version module link created');
+  } else {
+    ok(-f '/etc/profile.d/papi.csh' && -f '/etc/profile.d/papi.sh',
+       'papi profile.d installed');
+  }
+
+}
+
+`rm -f $TESTFILE*`;
+]]>
+</file>
+
+</post>
+
+</kickstart> 
