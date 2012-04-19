@@ -61,17 +61,17 @@ REDHAT.ROOT = $(PWD)/../../
 -include $(ROCKSROOT)/etc/Rules.mk
 
 build:
-	tar zxvf $(SOURCE).tar.gz
+	tar zxvf $(SOURCE).tgz
 	( \
-	  cd $(SOURCE); \
-          ./configure --with-components="rapl"; \
+	  cd $(SOURCE)/src; \
+          ./configure --prefix=$(ROOT)/$(PKGROOT) --with-components="rapl"; \
           make \
 	)
 
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	( \
-            cd $(SOURCE); \
+            cd $(SOURCE)/src; \
             make install \
         )
 
