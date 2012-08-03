@@ -16,18 +16,6 @@ All rights reserved. Rocks(r) v5.1 www.rocksclusters.org
 </changelog>
 
 <package>papi</package>
-
-<file name="/etc/profile.d/papi.csh" perms="0644">
-  set path = ( /opt/papi/bin $path )
-</file>
-
-<file name="/etc/profile.d/papi.sh" perms="0644">
-  export PATH=/opt/papi/bin:$PATH
-</file>
-
-<post>
-
-
-</post>
+<package>papi-modules</package>
 
 </kickstart>

@@ -1,0 +1,3 @@
+#%Module1.0
+module-whatis "PAPI for sandybridge"
+prepend-path PATH /opt/papi/bin
