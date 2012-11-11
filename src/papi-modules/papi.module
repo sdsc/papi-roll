@@ -1,3 +1,4 @@
 #%Module1.0
 module-whatis "PAPI for sandybridge"
+setenv PAPIHOME /opt/papi
 prepend-path PATH /opt/papi/bin
