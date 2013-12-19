@@ -2,7 +2,8 @@
 
 ## Overview
 
-This roll bundles... <REPLACE_ME> 
+This roll bundles the Performance Application Programming Interface (PAPI)
+software package.
 
 For more information about PAPI please visit the official web page:
 
