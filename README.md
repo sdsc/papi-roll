@@ -2,6 +2,8 @@
 
 ## Overview
 
+This roll is now deprecated. papi is now in the performance roll
+
 This roll bundles the Performance Application Programming Interface (PAPI)
 software package.
 
