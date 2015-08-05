@@ -1,8 +1,8 @@
 # SDSC "papi" roll
 
-## Overview
+The papi-roll is deprecated; its contents have been merged into the [performance-roll](https://github.com/sdsc/performance-roll)
 
-This roll is now deprecated. papi is now in the performance roll
+## Overview
 
 This roll bundles the Performance Application Programming Interface (PAPI)
 software package.
